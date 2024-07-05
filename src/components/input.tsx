@@ -1,22 +1,19 @@
 import { ReactNode } from "react";
 
-interface FormInputProps {
-  type: string;
-  placeholder: string;
-  required: boolean;
-  errors: string[];
+import { InputHTMLAttributes } from "react";
+
+interface InputProps {
   name: string;
+  errors?: string[];
   icon?: ReactNode;
 }
 
-export default function FormInput({
-  type,
-  placeholder,
-  required,
-  errors,
+export default function Input({
   name,
+  errors = [],
   icon,
-}: FormInputProps) {
+  ...rest
+}: InputProps & InputHTMLAttributes<HTMLInputElement>) {
   const hasError = errors.length > 0;
 
   return (
@@ -28,9 +25,7 @@ export default function FormInput({
             ? "ring-red-400 focus:ring-red-400 border-red-400"
             : "ring-neutral-200 focus:ring-gray-300 border-none"
         }`}
-        type={type}
-        placeholder={placeholder}
-        required={required}
+        {...rest}
       />
       {icon && (
         <div className="absolute left-3 top-0 h-10 flex items-center">

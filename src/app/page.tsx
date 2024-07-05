@@ -1,7 +1,7 @@
 "use client";
 
-import FormButton from "@/components/form-btn";
-import FormInput from "@/components/form-input";
+import FormButton from "@/components/button";
+import FormInput from "@/components/input";
 import { handleForm } from "./action";
 import { useFormState } from "react-dom";
 import { EnvelopeIcon, KeyIcon, UserIcon } from "@heroicons/react/16/solid";
@@ -23,7 +23,7 @@ export default function Home() {
             type="email"
             placeholder="Email"
             required
-            errors={[]}
+            errors={state?.error?.fieldErrors.email ?? []}
             icon={<EnvelopeIcon className="w-4 h-4 text-gray-500" />}
           />
           <FormInput
@@ -31,7 +31,7 @@ export default function Home() {
             type="text"
             placeholder="Username"
             required
-            errors={[]}
+            errors={state?.error?.fieldErrors.username ?? []}
             icon={<UserIcon className="w-4 h-4 text-gray-500" />}
           />
           <FormInput
@@ -39,7 +39,7 @@ export default function Home() {
             type="password"
             placeholder="Password"
             required
-            errors={state?.errors ?? []}
+            errors={state?.error?.fieldErrors.password ?? []}
             icon={<KeyIcon className="w-4 h-4 text-gray-500" />}
           />
           <FormButton text="Log in" />
